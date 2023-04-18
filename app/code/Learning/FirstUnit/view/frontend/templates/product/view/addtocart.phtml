@@ -9,7 +9,7 @@
 <?php $_product = $block->getProduct();
 $customAttribute = $_product->getAttributeText('custom_product_status'); ?>
 <?php $buttonTitle = __('Add to Cart');
-$tranlatableText = __('Standard Product'); ?>
+$translatableText = __('Standard Product'); ?>
 <?php if ($_product->isSaleable()) :?>
 <div class="box-tocart">
     <input type="hidden" id="status" name="status" value="<?= $customAttribute ?>">
@@ -38,7 +38,7 @@ $tranlatableText = __('Standard Product'); ?>
                         id="product-addtocart-button" disabled>
                     <span><?= $block->escapeHtml($buttonTitle) ?></span>
                 </button>
-                <p><?= $block->escapeHtml($tranlatableText); ?></p>
+                <p><?= $block->escapeHtml($translatableText); ?></p>
                 <?= $block->getChildHtml('', true) ?>
             </div>
 
