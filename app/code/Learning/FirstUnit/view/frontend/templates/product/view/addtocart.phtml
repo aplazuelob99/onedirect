@@ -12,7 +12,7 @@ $customAttribute = $_product->getAttributeText('custom_product_status'); ?>
 $tranlatableText = __('Standard Product'); ?>
 <?php if ($_product->isSaleable()) :?>
 <div class="box-tocart">
-    <?= $customAttribute;?>
+    <input type="hidden" id="status" name="status" value="<?= $customAttribute ?>">
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()) :?>
         <div class="field qty">
@@ -42,16 +42,15 @@ $tranlatableText = __('Standard Product'); ?>
                 <?= $block->getChildHtml('', true) ?>
             </div>
 
-            <?php else: ?>
-                <div class="actions">
-                    <button type="submit"
-                        title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
-                        class="action primary tocart"
-                        id="product-addtocart-button" disabled>
-                        <span><?= $block->escapeHtml($buttonTitle) ?></span>
-                    </button>
-                    <?= $block->getChildHtml('', true) ?>
-                </div>
+        <?php elseif($customAttribute == 'pre-order'): ?>
+            <div class="actions">
+                <button type="button"
+                        title=""
+                        class="action primary tocart preorder"
+                        id="" disabled>
+                    <span>Coming Soon</span>
+                </button>
+            </div>
         <?php endif; ?>
     </div>
 </div>
@@ -62,4 +61,15 @@ $tranlatableText = __('Standard Product'); ?>
             "Magento_Catalog/js/validate-product": {}
         }
     }
+</script>
+
+
+<script type="text/javascript">
+    require(['jquery'], function($) {
+        $(document).ready(function() {
+            if ($('input[name=status]').val() == 'discontinued') {
+                alert('¡Hello World!');
+            }
+        });
+    });
 </script>
