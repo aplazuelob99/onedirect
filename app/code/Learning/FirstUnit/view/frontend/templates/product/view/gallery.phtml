@@ -1,0 +1,15 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\View\Gallery $block */
+$_product = $block->getProduct();
+$customAttribute = $_product->getAttributeText('custom_product_status'); ?>
+
+
+<div class="product-img-box">
+    <?php if($customAttribute == 'pre-order'): ?>
+        <div class="preorder-icon">
+            <img src="<?php echo $block->getViewFileUrl('Learning_FirstUnit::images/preorder.jpg'); ?>" alt="preorder icon" />
+        </div>
+    <?php endif; ?>
+    <?php echo $block->getImage($_product, 'product_base_image')->toHtml(); ?>
+</div>
+
