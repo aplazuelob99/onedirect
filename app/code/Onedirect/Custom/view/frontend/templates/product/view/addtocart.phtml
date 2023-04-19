@@ -9,7 +9,22 @@
 <?php $_product = $block->getProduct();
 $customAttribute = $_product->getAttributeText('custom_product_status'); ?>
 <?php $buttonTitle = __('Add to Cart');
-$translatableText = __('Standard Product'); ?>
+$translatableText = __('Producto Estandard'); ?>
+
+<?php if($customAttribute == 'discontinued'): ?>
+
+    <div class="container-holder">
+        <div class="modal-discontinued" id="modal-product">
+            <div class="info-holder">
+                <p>Hello World!</p>
+            </div>
+            <div class="close" onclick="cerrarModal()"></div>
+        </div>
+        <div class="overlay-discontinued"></div>
+    </div>
+
+<?php endif; ?>
+
 <?php if ($_product->isSaleable()) :?>
 <div class="box-tocart">
     <input type="hidden" id="status" name="status" value="<?= $customAttribute ?>">
@@ -19,14 +34,14 @@ $translatableText = __('Standard Product'); ?>
             <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
             <div class="control">
                 <input type="number"
-                       name="qty"
-                       id="qty"
-                       min="0"
-                       value="<?= $block->getProductDefaultQty() * 1 ?>"
-                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
-                       class="input-text qty"
-                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
-                       />
+                    name="qty"
+                    id="qty"
+                    min="0"
+                    value="<?= $block->getProductDefaultQty() * 1 ?>"
+                    title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                    class="input-text qty"
+                    data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                />
             </div>
         </div>
         <?php endif; ?>
@@ -65,11 +80,9 @@ $translatableText = __('Standard Product'); ?>
 
 
 <script type="text/javascript">
-    require(['jquery'], function($) {
-        $(document).ready(function() {
-            if ($('input[name=status]').val() == 'discontinued') {
-                alert('¡Hello World!');
-            }
-        });
-    });
+    function cerrarModal(){
+        var modal = document.querySelector('.container-holder');
+        modal.style.display="none";
+
+    }
 </script>
